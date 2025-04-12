@@ -14,7 +14,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
       background-image: linear-gradient(to right, #0a0a0a, #1c1c1c);
     }
 
@@ -24,6 +25,8 @@
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 0 15px #ff4f9f44;
+      max-width: 500px;
+      width: 100%;
     }
 
     h1 {
@@ -57,7 +60,12 @@
     }
 
     .ads-placeholder {
-      margin-top: 20px;
+      margin-top: 25px;
+      padding: 10px;
+      background: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 100%;
     }
 
     .adult-warning {
@@ -75,10 +83,10 @@
     <button onclick="startWatching()">Start Watching</button>
     <p class="adult-warning">This site contains adult content. Viewer discretion is advised.</p>
 
-    <!-- Native Banner Ad -->
+    <!-- Native Banner Ad (Styled) -->
     <div class="ads-placeholder" id="nativeBanner">
       <script async="async" data-cfasync="false" src="//pl26364140.profitableratecpm.com/f6483c45a76970bebdf173069e56f10e/invoke.js"></script>
-      <div id="container-f6483c45a76970bebdf173069e56f10e"></div>
+      <div id="container-f6483c45a76970bebdf173069e56f10e" style="width: 100%; height: auto;"></div>
     </div>
   </div>
 
@@ -103,10 +111,7 @@
     function startWatching() {
       if (!watching) {
         watching = true;
-
-        // Load iframe once to trigger popunder
         document.getElementById("adFrame").src = "about:blank";
-
         setInterval(() => {
           coins++;
           updateCoinDisplay();
