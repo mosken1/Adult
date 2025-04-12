@@ -55,10 +55,6 @@
       background: #e9448b;
     }
 
-    iframe {
-      display: none;
-    }
-
     .ads-placeholder {
       margin-top: 25px;
       padding: 10px;
@@ -83,22 +79,14 @@
     <button onclick="startWatching()">Start Watching</button>
     <p class="adult-warning">This site contains adult content. Viewer discretion is advised.</p>
 
-    <!-- Native Banner Ad (Styled) -->
-    <div class="ads-placeholder" id="nativeBanner">
+    <!-- Native Banner Ad -->
+    <div class="ads-placeholder">
       <script async="async" data-cfasync="false" src="//pl26364140.profitableratecpm.com/f6483c45a76970bebdf173069e56f10e/invoke.js"></script>
       <div id="container-f6483c45a76970bebdf173069e56f10e" style="width: 100%; height: auto;"></div>
     </div>
   </div>
 
-  <!-- Hidden iframe for popunder activation -->
-  <iframe id="adFrame" width="1" height="1"></iframe>
-
-  <!-- Popunder Ad Script -->
-  <script type='text/javascript' src='//pl26364093.profitableratecpm.com/cf/b6/29/cfb6293950ab3b8888bfa61c5e1ab90d.js'></script>
-
-  <!-- Social Bar Ad Script -->
-  <script type='text/javascript' src='//pl26364122.profitableratecpm.com/01/b4/82/01b48292fbdb5354a099b1ca529b8cc7.js'></script>
-
+  <!-- Popunder & Social Bar Scripts (Loaded via JS) -->
   <script>
     let coins = parseInt(localStorage.getItem("coins")) || 0;
     let watching = false;
@@ -111,7 +99,13 @@
     function startWatching() {
       if (!watching) {
         watching = true;
-        document.getElementById("adFrame").src = "about:blank";
+        
+        // Popunder ad load triggered on user click
+        let popAd = document.createElement('script');
+        popAd.src = "//pl26364093.profitableratecpm.com/cf/b6/29/cfb6293950ab3b8888bfa61c5e1ab90d.js";
+        document.body.appendChild(popAd);
+
+        // Start coin generation
         setInterval(() => {
           coins++;
           updateCoinDisplay();
@@ -119,7 +113,14 @@
       }
     }
 
-    updateCoinDisplay();
+    // Social bar loaded on page load
+    window.onload = () => {
+      let socialBar = document.createElement('script');
+      socialBar.src = "//pl26364122.profitableratecpm.com/01/b4/82/01b48292fbdb5354a099b1ca529b8cc7.js";
+      document.body.appendChild(socialBar);
+
+      updateCoinDisplay();
+    }
   </script>
 </body>
 </html>
