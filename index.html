@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>18+ Watch & Earn</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #ff4f9f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: linear-gradient(to right, #0a0a0a, #1c1c1c);
+    }
+
+    .container {
+      text-align: center;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #ff4f9f44;
+    }
+
+    h1 {
+      color: #ff4f9f;
+      margin-bottom: 10px;
+    }
+
+    #coinCount {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ffe800;
+    }
+
+    button {
+      background: #ff4f9f;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #e9448b;
+    }
+
+    iframe {
+      display: none;
+    }
+
+    .ads-placeholder {
+      margin-top: 20px;
+    }
+
+    .adult-warning {
+      font-size: 0.9rem;
+      color: #ffaaaa;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>18+ Watch & Earn</h1>
+    <p>Earn 1 coin per second watching spicy ads</p>
+    <div id="coinCount">Coins: 0</div>
+    <button onclick="startWatching()">Start Watching</button>
+    <p class="adult-warning">This site contains adult content. Viewer discretion is advised.</p>
+
+    <!-- Native Banner Placeholder -->
+    <div class="ads-placeholder" id="nativeBanner">
+      <!-- Your native ad code goes here -->
+    </div>
+  </div>
+
+  <!-- Hidden iframe for popunder/ad viewing -->
+  <iframe id="adFrame" width="1" height="1"></iframe>
+
+  <!-- Placeholder for Social Bar -->
+  <!-- Add your Social Bar ad script here -->
+
+  <!-- Placeholder for Popunder -->
+  <!-- Add your Popunder ad script here -->
+
+  <script>
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    let watching = false;
+
+    function updateCoinDisplay() {
+      document.getElementById("coinCount").textContent = `Coins: ${coins}`;
+      localStorage.setItem("coins", coins);
+    }
+
+    function startWatching() {
+      if (!watching) {
+        watching = true;
+
+        // Load ad iframe (replace with adult ad URL)
+        let iframe = document.getElementById("adFrame");
+        iframe.src = "about:blank"; // Change this to your ad URL if needed
+
+        setInterval(() => {
+          coins++;
+          updateCoinDisplay();
+
+          // Refresh ad iframe every 10 seconds
+          if (coins % 10 === 0) {
+            iframe.src = iframe.src;
+          }
+        }, 1000);
+      }
+    }
+
+    updateCoinDisplay();
+  </script>
+</body>
+</html>
